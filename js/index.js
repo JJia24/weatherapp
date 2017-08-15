@@ -1,3 +1,4 @@
+//This object stores background images for use in the dynamic background
 var backgrounds={
   rain:'https://static.pexels.com/photos/39811/pexels-photo-39811.jpeg',
   clear:'https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg',
@@ -5,7 +6,7 @@ var backgrounds={
   mist:'https://images.pexels.com/photos/4827/nature-forest-trees-fog.jpeg',
   thunder:'https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg'
 };
-    
+
 $(window).on("load", function() {
   if (navigator.geolocation) {
     //checks for geolocation support
@@ -39,14 +40,34 @@ $(window).on("load", function() {
             json.weather[0].description +
             "</h4>"+"<h4>"+temp+" °C</h4>"
         );
-        $("#weather-data").append(   
-            
+        $("#weather-data").append(
+
             "<h4>Wind speed: " +
             json.wind.speed +
-            "</h4>" 
-            
+            "</h4>"
+
         );
-       
+       switch(cond){
+         case 'Rain':
+           console.log('It is raining');
+           break;
+        case 'Thunderstorm':
+           console.log('It is thundery');
+           break;
+        case 'Drizzle':
+           console.log('It is drizzly');
+           break;
+        case 'Clear':
+           console.log('It is clear');
+           break;
+        case 'Atmosphere':
+           console.log('It is very atmospheric');
+           break;
+        case 'Snow':
+           console.log('It is snowing');
+           break;
+
+       }
       });
     });
   }
