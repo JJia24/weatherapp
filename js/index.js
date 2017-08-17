@@ -4,7 +4,8 @@ var backgrounds={
   clear:'https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg',
   snow:'https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg',
   mist:'https://images.pexels.com/photos/4827/nature-forest-trees-fog.jpeg',
-  thunder:'https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg'
+  thunder:'https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg',
+  clouds:'https://images.pexels.com/photos/414659/pexels-photo-414659.jpeg'
 };
 
 $(window).on("load", function() {
@@ -27,6 +28,7 @@ $(window).on("load", function() {
         let temp = data.main.temp;
         let json=data;
         let cond=json.weather[0].main;
+        let body=$("body");
         //appends received data to page
         $("#location").append(
           "<h3>Your location: " +
@@ -50,21 +52,54 @@ $(window).on("load", function() {
        switch(cond){
          case 'Rain':
            console.log('It is raining');
+           body.addClass("background");
+           if (body.hasClass("background")){
+             body.css("background","url(backgrounds.rain)");
+           }
            break;
+
         case 'Thunderstorm':
            console.log('It is thundery');
+           body.addClass("background");
+           if (body.hasClass("background")){
+             body.css("background","url(backgrounds.thunder)");
+           }
+           break;
+
+        case 'Clouds':
+          console.log('It is cloudy');
+          body.addClass("background");
+          if (body.hasClass("background")){
+            body.css("background","url(backgrounds.clouds)");
+          }
            break;
         case 'Drizzle':
            console.log('It is drizzly');
+           body.addClass("background");
+           if (body.hasClass("background")){
+             body.css("background","url(backgrounds.rain)");
+           }
            break;
         case 'Clear':
            console.log('It is clear');
+           body.addClass("background");
+           if (body.hasClass("background")){
+             body.css("background","url(backgrounds.clear)");
+           }
            break;
         case 'Atmosphere':
            console.log('It is very atmospheric');
+           body.addClass("background");
+           if (body.hasClass("background")){
+             body.css("background","url(backgrounds.mist)");
+           }
            break;
         case 'Snow':
            console.log('It is snowing');
+           body.addClass("background");
+           if (body.hasClass("background")){
+             body.css("background","url(backgrounds.snow)");
+           }
            break;
 
        }
