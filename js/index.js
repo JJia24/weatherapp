@@ -5,7 +5,7 @@ var backgrounds={
   snow:'https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg',
   mist:'https://images.pexels.com/photos/4827/nature-forest-trees-fog.jpeg',
   thunder:'https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg',
-  clouds:'https://images.pexels.com/photos/414659/pexels-photo-414659.jpeg'
+  clouds: 'https://images.pexels.com/photos/414659/pexels-photo-414659.jpeg'
 };
 
 $(window).on("load", function() {
@@ -27,8 +27,16 @@ $(window).on("load", function() {
         console.log(data);
         let temp = data.main.temp;
         let json=data;
-        let cond=json.weather[0].main;
+        let cond=[];
         let body=$("body");
+
+        //can be more than one weather condition, weatherCond loops through the possibilities
+        function weatherCond(json){
+          for (let i=0;i<json.weather.length;i++){
+            cond.push(json.weather[i].main);
+            return;
+          }
+        }
         //appends received data to page
         $("#location").append(
           "<h3>Your location: " +
@@ -49,12 +57,27 @@ $(window).on("load", function() {
             "</h4>"
 
         );
-       switch(cond){
+        weatherCond(json);
+        console.log(cond);
+
+//loops through all the values stored in the cond array
+     for (var v=0;v<cond.length;v++){
+       switch(cond[v]){
          case 'Rain':
            console.log('It is raining');
            body.addClass("background");
            if (body.hasClass("background")){
-             body.css("background","url(backgrounds.rain)");
+             body.css({
+               backgroundImage:"url("+backgrounds.rain+")",
+               backgroundSize:"cover",
+               backgroundRepeat:"no-repeat",
+               backgroundPosition:"center",
+               backgroundAttachment:"fixed",
+               height:"100%"
+
+
+
+             });
            }
            break;
 
@@ -62,7 +85,14 @@ $(window).on("load", function() {
            console.log('It is thundery');
            body.addClass("background");
            if (body.hasClass("background")){
-             body.css("background","url(backgrounds.thunder)");
+             body.css({
+             backgroundImage: "url("+backgrounds.thunder+")",
+             backgroundSize:"cover",
+             backgroundRepeat:"no-repeat",
+             backgroundPosition:"center",
+             backgroundAttachment:"fixed",
+             height:"100%"
+           });
            }
            break;
 
@@ -70,39 +100,78 @@ $(window).on("load", function() {
           console.log('It is cloudy');
           body.addClass("background");
           if (body.hasClass("background")){
-            body.css("background","url(backgrounds.clouds)");
+            body.css({
+            backgroundImage:"url("+backgrounds.clouds+")",
+            backgroundSize:"cover",
+            backgroundRepeat:"no-repeat",
+            backgroundPosition:"center",
+            backgroundAttachment:"fixed",
+            height:"100%"
+          });
           }
            break;
         case 'Drizzle':
            console.log('It is drizzly');
            body.addClass("background");
            if (body.hasClass("background")){
-             body.css("background","url(backgrounds.rain)");
+             body.css({
+             backgroundImage:"url(" + backgrounds.rain + ")",
+             backgroundSize:"cover",
+             backgroundRepeat:"no-repeat",
+             backgroundPosition:"center",
+             backgroundAttachment:"fixed",
+             height:"100%"
+           });
            }
            break;
         case 'Clear':
            console.log('It is clear');
            body.addClass("background");
            if (body.hasClass("background")){
-             body.css("background","url(backgrounds.clear)");
+             body.css({
+             backgroundImage: "url("+backgrounds.clear+")",
+             backgroundSize:"cover",
+             backgroundRepeat:"no-repeat",
+             backgroundPosition:"center",
+             backgroundAttachment:"fixed",
+             height:"100%"
+           });
            }
            break;
-        case 'Atmosphere':
+        case 'Mist':
+        case 'Fog':
            console.log('It is very atmospheric');
            body.addClass("background");
            if (body.hasClass("background")){
-             body.css("background","url(backgrounds.mist)");
+             body.css({
+             backgroundImage:"url("+backgrounds.mist+")",
+             backgroundSize:"cover",
+             backgroundRepeat:"no-repeat",
+             backgroundPosition:"center",
+             backgroundAttachment:"fixed",
+             height:"100%"
+           });
+
            }
            break;
         case 'Snow':
            console.log('It is snowing');
            body.addClass("background");
            if (body.hasClass("background")){
-             body.css("background","url(backgrounds.snow)");
+             body.css({
+             backgroundImage:"url("+backgrounds.snow+")",
+             backgroundSize:"cover",
+             backgroundRepeat:"no-repeat",
+             backgroundPosition:"center",
+             backgroundAttachment:"fixed",
+             height:"100%"
+           });
            }
            break;
 
        }
+     }
+
       });
     });
   }
